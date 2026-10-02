@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased transition-colors duration-300 dark:bg-night dark:text-slate-100;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-cobalt dark:outline-periwinkle;
+  }
+}
+
+/* Ambient glow orbs */
+.ambient-glow-1 {
+  position: fixed;
+  top: -100px;
+  left: 15%;
+  width: 580px;
+  height: 580px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-2 {
+  position: fixed;
+  top: 40%;
+  right: -100px;
+  width: 650px;
+  height: 650px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, rgba(168, 85, 247, 0) 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-3 {
+  position: fixed;
+  bottom: 0px;
+  left: -50px;
+  width: 600px;
+  height: 600px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.10) 0%, rgba(14, 165, 233, 0) 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+html:not(.dark) .ambient-glow-1 {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+}
+html:not(.dark) .ambient-glow-2 {
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, rgba(236, 72, 153, 0) 70%);
+}
+html:not(.dark) .ambient-glow-3 {
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, rgba(14, 165, 233, 0) 70%);
+}
+
+/* Dot grid overlay */
+.bg-dot-grid {
+  background-size: 32px 32px;
+  background-image: radial-gradient(circle, rgba(100, 116, 139, 0.14) 1px, transparent 1px);
+}
+.dark .bg-dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+}
+
+/* Glass card utilities */
+.glass-panel {
+  @apply border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-sm transition-all duration-300 dark:border-white/10 dark:bg-white/[0.03] dark:shadow-none;
+}
+
+.glass-panel-hover {
+  @apply hover:border-indigo-500/40 hover:shadow-lg hover:shadow-indigo-500/5 dark:hover:border-indigo-400/40 dark:hover:bg-white/[0.05];
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.04); opacity: 0.7; }
+}
+
+.pulse-glow {
+  animation: pulseGlow 6s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-in { animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.hero-in-late { animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-in, .hero-in-late, .pulse-glow { animation: none; }
+}
